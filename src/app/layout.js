@@ -1,7 +1,19 @@
-import { Inter } from "next/font/google";
+import { Inter, DM_Sans, DM_Serif_Display } from "next/font/google";
 import "./globals.css";
+import QueryProvider from "@/components/QueryProvider";
 
 const inter = Inter({ subsets: ["latin"] });
+
+const dm_sans = DM_Sans({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800", "900"], // light to extra bold and black
+});
+
+const dm_serif_display = DM_Serif_Display({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-dm-serif",
+});
 
 export const metadata = {
   title: "Create Next App",
@@ -11,7 +23,11 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={`${dm_sans.className} ${dm_serif_display.variable}`}>
+      <QueryProvider>
+        {children}
+      </QueryProvider>
+      </body>
     </html>
   );
 }
