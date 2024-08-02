@@ -10,9 +10,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 const apiKey = "4d08b29";
-const movieTitle = "My Neighbor Totoro"
+
 
 export default function Home() {
+
+  const [input, setInput] = useState("");
+  const [getInput, setGetInput] = useState("Deadpool")
+
+  const movieTitle = getInput;
 
   const{ data, error, refetch, isError, isLoading } = useQuery({
     queryKey: ['omdbData', movieTitle],
@@ -35,17 +40,14 @@ export default function Home() {
     return truncatedStr;
   }
 
-  // input
-
-  const [input, setInput] = useState("");
-
   function handleSearchOnClick () {
-    console.log(input)
+    setGetInput(input);
   }
 
 
 
-  const genres = ["Adventure", "Drama", "Family"];
+  const genrh = ["Adventure", "Drama", "Family"];
+  const genres = data.Genre.split(", ");
 
 
   return(
@@ -68,8 +70,13 @@ export default function Home() {
           <div className="movie-description px-32">
 
           <div className="border-white opacity-75 mb-2 rounded-md flex bg-transparent border-solid border-2 w-72 py-2 px-2 justify-between">
-            <input type="text"  className="bg-transparent active:bg-transparent focus:outline-none w-5/6" placeholder="Search Movie" name="" id="" value={input} onInput={e => setInput(e.target.value)}/>
-            <div className="opacity-75 px-3"><FontAwesomeIcon icon={faSearch}
+            <input type="text"  className="bg-transparent active:bg-transparent focus:outline-none w-5/6" placeholder="Search Movie" name="" id="" value={input} onInput={e => setInput(e.target.value)}
+            onKeyDown={(e) => { 
+              if (e.key === "Enter") 
+                  handleSearchOnClick(); 
+              }} 
+            />
+            <div className="opacity-75 px-3 cursor-pointer"><FontAwesomeIcon icon={faSearch}
             onClick={handleSearchOnClick}
             ></FontAwesomeIcon></div>
           </div>
@@ -97,8 +104,10 @@ export default function Home() {
 
             <div className="genre flex mt-3 space-x-5">
               {genres.map((genre, index) => (
-                <div key={index} className="border-r-2 flex h-4 items-center pr-5 border-white ">{genre}</div>
-              ))}          
+                <div className="border-r-2 flex h-4 items-center pr-5 border-white " key={index}>{genre}</div>
+              ))}
+                
+                   
             </div>
 
             <div className="mt-2">
@@ -129,61 +138,4 @@ export default function Home() {
     </main>
   )
 
-  // const [seconds, setSeconds] = useState(0);
-
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     setSeconds(prevSeconds => prevSeconds + 1);
-  //   }, 1000);
-  //   return () => clearInterval(interval); // Cleanup the interval on component unmount
-  // }, []); // Empty dependency array means this effect runs once when the component mounts
-
-  // useEffect(() => {
-  //   if (seconds === 30) {
-  //     alert('Time out!');
-  //     setSeconds(0); // Reset the timer if you want to start again
-  //     // Or clear the interval to stop the timer
-  //   }
-  // }, [seconds]);
-
-  // return <div>Seconds: {seconds}</div>;
-
-  // const [count, setCount] = useState(0);
-  // const [textColor, setTextColor] = useState("black");
-
-  // const handleIncreaseButton = () => {
-  //   setCount(count + 1);
-  // }
-
-  // const handleDecreaseButton = () => {
-  //   setCount(count - 1);
-  // }
-
-  // useEffect(() => {
-  //   if (count === 10 || count === 20) {
-  //     setTextColor("red");
-  //   } else {
-  //     setTextColor("black");
-  //   }
-  // }, [count]);
-
-  // return (
-  //   <div className="px-10 py-10">
-  //     <h1 style={{ color: textColor }}>count : {count}</h1>
-  //     <div className="space-x-2">
-  //       <button 
-  //         className="bg-red-400 rounded-md py-2 px-4 text-white duration-300 hover:scale-110" 
-  //         onClick={handleDecreaseButton}
-  //       >
-  //         Decrease
-  //       </button>
-  //       <button 
-  //         className="bg-blue-400 rounded-md py-2 px-4 text-white duration-300 hover:scale-110" 
-  //         onClick={handleIncreaseButton}
-  //       >
-  //         Increase
-  //       </button>
-  //     </div>
-  //   </div>
-  
 }
