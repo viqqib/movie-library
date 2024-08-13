@@ -1,0 +1,121 @@
+'use client'
+import React, { useState, useEffect } from "react";
+import Image from "next/image";
+import bg from '../../public/bg.jpg'
+import axios from "axios";
+import { useQuery } from "@tanstack/react-query";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import MovieDescription from "@/components/MovieDescription";
+
+const apiKey = "4d08b29";
+
+const fetchPostersFromTmdb = async () => {
+  const tmdbApiKey = "92b0f3d01f07b3710e21b8f604bf0646"
+  const response = await axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=${tmdbApiKey}`)
+  return response.data.results;
+}
+
+export default function Home() {
+
+
+  const [input, setInput] = useState("");
+  const [getInput, setGetInput] = useState("Totoro")
+  
+
+
+    const handleImageClick = (event) => {
+      const altText = event.target.alt;
+      setGetInput(altText); // Logs "Deadpool"
+    }
+
+  const movieTitle = getInput;
+
+  const{ data: tmdbData } = useQuery({
+    queryKey: ['tmdbData'],
+    queryFn: fetchPostersFromTmdb,
+  })
+
+  const{ data, error, refetch, isError, isLoading } = useQuery({
+    queryKey: ['omdbData', movieTitle],
+    queryFn: async() => {
+      const response = await axios.get(`https://www.omdbapi.com/?t=${movieTitle}&apikey=${apiKey}`);
+      return response.data;
+    }
+  })
+
+
+  if (isError) {
+      return <div>Error: {error.message}</div>;
+  }
+
+ 
+
+  function handleSearchOnClick () {
+    setGetInput(input);
+  }
+
+
+
+  return(
+    <main className="flex flex-col items-center justify-between text-white">
+      <div className="relative w-full">
+        <div className="absolute w-full -z-10">
+          <Image
+            src={bg}
+            className="w-full brightness-50"
+            width={1000}
+            height={1000}
+          ></Image>
+        </div>
+
+        <div className="header py-12 text-[2rem] top-0 right-0 px-32 flex justify-between text-header">
+          <p className="">Library</p>
+          <p>IMDb</p>
+        </div>
+          
+          <div className="movie-description px-32">
+
+            <div className="border-white opacity-75 mb-2 rounded-md flex bg-transparent border-solid border-2 w-72 py-2 px-2 justify-between">
+              <input type="text"  className="bg-transparent active:bg-transparent focus:outline-none w-5/6" placeholder="Search Movie" name="" id="" value={input} onInput={e => setInput(e.target.value)}
+              onKeyDown={(e) => { 
+                if (e.key === "Enter") 
+                    handleSearchOnClick(); 
+                }} 
+              />
+              <div className="opacity-75 px-3 cursor-pointer"><FontAwesomeIcon icon={faSearch}
+              onClick={handleSearchOnClick}
+              ></FontAwesomeIcon></div>
+            </div>
+
+           <div className="flex space-x-5 overflow-hidden py-5">
+            {tmdbData && tmdbData.map((movie,index) => (
+                <Image
+                key={index} // Ensure you have a unique key for each element
+                src={` https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+                width={200}
+                height={100}
+                className="my-2 rounded-md hover:scale-110 duration-300"
+                alt={movie.title} // Use the alt text from the slides array
+                onMouseOver={handleImageClick}
+            />
+            ))}
+      
+          </div>
+            
+            {isLoading ? "loading" : 
+            <MovieDescription genre={data.Genre} title={data.Title} director={data.Director} actors={data.Actors} country={data.Country} plot={data.Plot} 
+            imdbRating={data.Ratings.find(( rate ) => rate.Source === "Internet Movie Database")?.Value || "N/A"}  
+            rtRating={data.Ratings.find(( rate ) => rate.Source === "Rotten Tomatoes")?.Value || "N/A"}  
+            />
+            }
+      
+         
+
+        </div>
+
+      </div>
+    </main>
+  )
+
+}
