@@ -40,8 +40,8 @@ const Header = () => {
 
             <div className="w-full bg-gray-900 px-3 py-2 mt-3 md:hidden rounded-">
                 <ul className="flex justify-between text-xs">
-                    { headerLinks.map(({name, link}) => (
-                         <li><a href={link}>{name}</a></li>
+                    { headerLinks.map(({name, link, index}) => (
+                         <li key={index}><a href={link}>{name}</a></li>
                     ))}
                 </ul>
             </div>
