@@ -4,7 +4,7 @@ import axios from "axios";
 import { useQueries } from "@tanstack/react-query";
 import MovieCard from "@/components/MovieCard";
 import {FaChevronCircleLeft, FaChevronCircleRight} from 'react-icons/fa'
-
+import Header from "@/components/Header";
 
 
 const fetchPopularFromTmdb = async () => {
@@ -68,28 +68,29 @@ export default function Home() {
   return (
     <main>
       <div className="bg-teal-950 min-h-screen justify-center md:px-44 px-5 text-white pb-10">
-        <div className="header w-full py-10 flex justify-between text-header font-medium">
-          <p className="md:text-[2rem]">Library</p>
-          <p className="md:text-[2rem]">Film</p>
-        </div>
+
+        <Header />
 
         <div className="popular-movie-container">
           <div className="flex items-center">
             <div className="text-xl border-red-500 border-l-4 h-4"></div>
-            <p className="text-lg ml-2">Popular Movies</p>
+            <p className="md:text-lg ml-2">Popular Movies</p>
           </div>
           
           <div className="relative flex items-center    mt-3">
-            <FaChevronCircleLeft size={35} className="hidden md:static opacity-50 hover:opacity-80 duration-300 cursor-pointer absolute z-10 left-0 top-32" onClick={slideLeft}/>
-            <div className=" space-x-3 md:space-x-5 overflow-x-scroll scroll  scrollbar-hide scroll-smooth flex" id="slider">
+            <FaChevronCircleLeft size={35} className="hidden md:block opacity-30 hover:opacity-80 duration-300 cursor-pointer absolute z-10 left-1 top-32" onClick={slideLeft}/>
+            <div className=" space-x-3 md:space-x-5 overflow-y-hidden overflow-x-scroll scroll  scrollbar-hide scroll-smooth flex" id="slider">
               {popularMovies.map((movie, index) => (
                 <MovieCard
+                  alt={movie.title}
                   key={index}
                   src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
                   title={movie.title}
+                  link={`movie/${movie.title}`}
+
                 />
               ))}
-              <FaChevronCircleRight size={35} className="hidden md:static opacity-80 hover:opacity-90 duration-300 absolute z-10 right-6 top-32 cursor-pointer" onClick={slideRight}/>
+              <FaChevronCircleRight size={35} className="hidden md:block opacity-30 hover:opacity-90 duration-300 absolute z-10 right-6 top-32 cursor-pointer" onClick={slideRight}/>
             </div>
           </div>
         </div>

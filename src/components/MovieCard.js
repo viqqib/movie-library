@@ -43,9 +43,9 @@ const MovieCard = (props) => {
                 <button className={`${isMouseOver ? "static" : "hidden"} hover:bg-white hover:text-black md:text-base text-xs  duration-500 font-bold border-solid border-2 rounded-full border-white px-5 py-1`}>View</button>
            </div>
 
-            <p className="md:text-sm text-[11px]  mt-2 md:mt-2 font-light ">
-                {truncateString(props.title,50)}
-            </p>
+            <div className="md:text-sm text-[11px]  mt-2 md:mt-2 font-light ">
+               <a href={props.link}> {truncateString(props.title,50)}</a>
+            </div>
 
          
           
