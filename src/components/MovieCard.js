@@ -1,5 +1,7 @@
+'use client'
 import React, { useState } from "react";
 import Image from "next/image";
+import { useRouter } from 'next/navigation'; // Correct for Next.js 13 App Router
 
 const MovieCard = (props) => {
     function truncateString(text, maxLength) {
@@ -10,6 +12,11 @@ const MovieCard = (props) => {
             return text.trim();
         }
     }
+
+    const router = useRouter();
+    const handleBtnClick = () => {
+        router.push(props.link); // Replace with your target page
+      }
 
     const [isMouseOver, setIsMouseOver] = useState(false);
 
@@ -40,7 +47,9 @@ const MovieCard = (props) => {
            onMouseOver={handleMouseOver}
            onMouseLeave={handleMouseLeave}
            >
-                <button className={`${isMouseOver ? "static" : "hidden"} hover:bg-white hover:text-black md:text-base text-xs  duration-500 font-bold border-solid border-2 rounded-full border-white px-5 py-1`}>View</button>
+                <button className={`${isMouseOver ? "static" : "hidden"} hover:bg-white hover:text-black md:text-base text-xs  duration-500 font-bold border-solid border-2 rounded-full border-white px-5 py-1`}
+                onClick={handleBtnClick}
+                >View</button>
            </div>
 
             <div className="md:text-sm text-[11px]  mt-2 md:mt-2 font-light ">

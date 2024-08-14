@@ -1,6 +1,7 @@
 import { Inter, DM_Sans, DM_Serif_Display } from "next/font/google";
 import "./globals.css";
 import QueryProvider from "@/components/QueryProvider";
+import Header from "@/components/Header";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,8 +24,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${dm_sans.className} ${dm_serif_display.variable}`}>
+      <body className={`${dm_sans.className} ${dm_serif_display.variable} bg-teal-950`}>
       <QueryProvider>
+        <Header />
         {children}
       </QueryProvider>
       </body>

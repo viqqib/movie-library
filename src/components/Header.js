@@ -7,7 +7,7 @@ const Header = () => {
     const headerLinks = [
         {
             name: 'Home',
-            link: '/home'
+            link: '/'
         },
         {
             name: 'Tv Show',
@@ -15,7 +15,7 @@ const Header = () => {
         },
         {
             name: 'Top Rated',
-            link: '/movie'
+            link: '/top-rated'
         },
         {
             name: 'About',
@@ -26,9 +26,18 @@ const Header = () => {
 
     return(
         <>
-        <div className="header w-full items-center py-5 md:py-10 flex justify-between flex-col text-header font-medium">
+        <div className="header px-5 md:px-44 w-full items-center py-5 md:py-10 flex justify-between flex-col text-header font-medium">
             <div className="w-full items-center flex justify-between text-header font-medium">
                 <p className="md:text-[2rem] text-xl">Movieqqi</p>
+
+                <div className="w-[500px] hidden md:block bg-gray-900 px-3 py-2 mt-3 rounded-">
+                    <ul className="flex justify-between text-xs">
+                        { headerLinks.map(({name, link, index}) => (
+                            <li key={index}><a href={link}>{name}</a></li>
+                        ))}
+                    </ul>
+                </div>
+
                 <div className="flex items-center">
                 <div className="relative bg-transparent border-2 rounded-lg border-gray-50 opacity-70 flex">
                     <input type="text" className="bg-transparent w-[160px] md:w-[300px] md:py-2  md:px-3 py-1 px-2 focus:outline-none" name="" id="" />

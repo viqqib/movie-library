@@ -13,11 +13,7 @@ const fetchPopularFromTmdb = async () => {
   return response.data.results;
 };
 
-const fetchTopRatedFromTmdb = async () => {
-  const tmdbApiKey = "92b0f3d01f07b3710e21b8f604bf0646";
-  const response = await axios.get(`https://api.themoviedb.org/3/movie/top_rated?api_key=${tmdbApiKey}`);
-  return response.data.results;
-};
+
 
 export default function Home() {
 
@@ -37,10 +33,6 @@ export default function Home() {
       {
         queryKey: ['popularMovies'],
         queryFn: fetchPopularFromTmdb,
-      },
-      {
-        queryKey: ['topRatedMovies'],
-        queryFn: fetchTopRatedFromTmdb,
       },
     ],
   });
@@ -69,7 +61,6 @@ export default function Home() {
     <main>
       <div className="bg-teal-950 min-h-screen justify-center md:px-44 px-5 text-white pb-10">
 
-        <Header />
 
         <div className="popular-movie-container">
           <div className="flex items-center">
@@ -86,7 +77,7 @@ export default function Home() {
                   key={index}
                   src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
                   title={movie.title}
-                  link={`movie/${movie.title}`}
+                  link={`details/${movie.title}`}
 
                 />
               ))}
