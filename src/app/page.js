@@ -81,7 +81,7 @@ export default function Home() {
           
           <div className="relative flex items-center    mt-3">
             <FaChevronCircleLeft size={35} className="hidden md:static opacity-50 hover:opacity-80 duration-300 cursor-pointer absolute z-10 left-0 top-32" onClick={slideLeft}/>
-            <div className=" space-x-2 md:space-x-5 overflow-x-scroll scroll  scrollbar-hide scroll-smooth flex" id="slider">
+            <div className=" space-x-3 md:space-x-5 overflow-x-scroll scroll  scrollbar-hide scroll-smooth flex" id="slider">
               {popularMovies.map((movie, index) => (
                 <MovieCard
                   key={index}

@@ -22,7 +22,7 @@ const MovieCard = (props) => {
     
     return (
         <div className="h-[220px] md:h-[305px] relative">
-            <div className={`h-[175px] w-[115px] md:w-[170px]  md:h-[255px] ${isMouseOver ? "brightness-50" : "brightness-100"} duration-300`}
+            <div className={`h-[180px] w-[120px] md:w-[170px]  md:h-[255px] ${isMouseOver ? "brightness-50" : "brightness-100"} duration-300`}
                onMouseOver={handleMouseOver}
                onMouseLeave={handleMouseLeave}
             >
@@ -43,7 +43,7 @@ const MovieCard = (props) => {
                 <button className={`${isMouseOver ? "static" : "hidden"} hover:bg-white hover:text-black md:text-base text-xs  duration-500 font-bold border-solid border-2 rounded-full border-white px-5 py-1`}>View</button>
            </div>
 
-            <p className="md:text-sm text-[0.6rem]  mt-1 md:mt-2 font-light ">
+            <p className="md:text-sm text-[0.6rem]  mt-2 md:mt-2 font-light ">
                 {truncateString(props.title,50)}
             </p>
 
