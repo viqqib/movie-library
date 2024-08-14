@@ -80,7 +80,7 @@ export default function Home() {
           </div>
           
           <div className="relative flex items-center    mt-3">
-            <FaChevronCircleLeft size={35} className="opacity-50 hover:opacity-80 duration-300 cursor-pointer absolute z-10 left-0 top-32" onClick={slideLeft}/>
+            <FaChevronCircleLeft size={35} className="hidden md:static opacity-50 hover:opacity-80 duration-300 cursor-pointer absolute z-10 left-0 top-32" onClick={slideLeft}/>
             <div className=" space-x-2 md:space-x-5 overflow-x-scroll scroll  scrollbar-hide scroll-smooth flex" id="slider">
               {popularMovies.map((movie, index) => (
                 <MovieCard
@@ -89,7 +89,7 @@ export default function Home() {
                   title={movie.title}
                 />
               ))}
-              <FaChevronCircleRight size={35} className="opacity-80 hover:opacity-90 duration-300 absolute z-10 right-6 top-32 cursor-pointer" onClick={slideRight}/>
+              <FaChevronCircleRight size={35} className="hidden md:static opacity-80 hover:opacity-90 duration-300 absolute z-10 right-6 top-32 cursor-pointer" onClick={slideRight}/>
             </div>
           </div>
         </div>
