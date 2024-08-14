@@ -81,7 +81,7 @@ export default function Home() {
 
                 />
               ))}
-              <FaChevronCircleRight size={35} className="hidden md:block opacity-30 hover:opacity-90 duration-300 absolute z-10 right-6 top-32 cursor-pointer" onClick={slideRight}/>
+              <FaChevronCircleRight size={35} className="hidden md:block opacity-30 hover:opacity-90 duration-300 absolute z-10 right-2 top-32 cursor-pointer" onClick={slideRight}/>
             </div>
           </div>
         </div>
