@@ -25,10 +25,12 @@ export default function TopRated() {
             <div className="movie-container w-full bg-gray-700">
                 <div className="w-full  flex flex-wrap">
                 {data?.map((movie, index) => (
-                    <ListCard
+                   <div key={index}>
+                     <ListCard
                     src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
                     title={movie.title}
                     />
+                   </div>
               ))}
                 </div>
                 {/* <div className="flex flex-col flex-wrap w-full bg-black ">
