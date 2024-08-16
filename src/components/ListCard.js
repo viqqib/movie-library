@@ -7,7 +7,7 @@ import Image from "next/image"
 
 const ListCard = (props) => {
     return <>
-        <div className="flex w-1/2 p-2">
+        <div className="flex w-full p-2">
 
             <div className="w-[165px] h-[250px]">
                 <Image
