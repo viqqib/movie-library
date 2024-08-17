@@ -1,6 +1,7 @@
 'use client'
-import React from "react"
+import React, { useState } from "react"
 import {FaSearch} from 'react-icons/fa'
+import { useRouter } from "next/navigation"
 
 const Header = () => {
 
@@ -24,6 +25,23 @@ const Header = () => {
 
     ]
 
+    const router = useRouter();
+    const handleSearchClick = () => {
+        router.push('top-rated'); // Replace with your target page
+      }
+
+      const [getValue, setGetValue] = useState("");
+      const [inputValue, setInputValue] = useState("");
+
+      const handleSearchChange = (event) => {
+        const value = event.target.value;
+        setInputValue(value);
+      }
+
+      const handleSearchOnClick = () => {
+        router.push(`/search/${inputValue}`); // Navigate to the search page with the encoded input value
+        };
+
     return(
         <>
         <div className="header px-5 md:px-44 w-full items-center py-5 md:py-10 flex justify-between flex-col text-header font-medium">
@@ -40,9 +58,14 @@ const Header = () => {
 
                 <div className="flex items-center">
                 <div className="relative bg-transparent border-2 rounded-lg border-gray-50 opacity-70 flex">
-                    <input type="text" className="bg-transparent w-[160px] md:w-[300px] md:py-2  md:px-3 py-1 px-2 focus:outline-none" name="" id="" />
+                    <input type="text" className="bg-transparent w-[160px] md:w-[300px] md:py-2  md:px-3 py-1 px-2 focus:outline-none" name="" id="" 
+                    onChange={handleSearchChange}
+                    value={inputValue}
+                    />
                     <div className="w-[30px]"></div>
-                    <FaSearch  className="absolute text-gray-50 opacity-70 right-3 top-2 cursor-pointer md:text-xl"/>
+                    <FaSearch  className="absolute text-gray-50 opacity-70 right-3 top-2 cursor-pointer md:text-xl" 
+                    onClick={handleSearchOnClick}
+                    />
                 </div>
                 </div>
             </div>
