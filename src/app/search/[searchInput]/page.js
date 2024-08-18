@@ -75,19 +75,17 @@ export default function SearchPage( { params } ) {
                 }}>
                     <p>Showing results from <span className="text-yellow-300">{searchInput}</span></p>
                 </div>
-            
+
             {data?.map((movie, index) => (
-                <div key={index}>
                 <ListCard 
                     index={index}
                     posterUrl={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
                     detailUrl={`../details/${movie.id}`} //
                     title={movie.title}
                     genre={movie.genre_ids.map(id => genreMap[id]).join(", ")}
-
                 />
-                </div>      
-        ))}
+            ))}
+     
 
                 <div  className="flex w-full backdrop-blur-lg bg-white/10 rounded-md duration-200 py-2 mt-6"
                 style={{

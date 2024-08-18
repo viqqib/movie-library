@@ -8,8 +8,9 @@ import Link from "next/link"
 
 const ListCard = (props) => {
     const index = props.index;
-    return <>
+    return (
         <div
+                key={index}
                 className={`w-full md:w-[50%] flex flex-row md:py-2 ${index % 2 === 0 ? 'md:r-5' : 'md:pl-5'} duration-200`}
             >
                 <div
@@ -48,7 +49,7 @@ const ListCard = (props) => {
                     </div>
                 </div>
             </div>
-    </>
+    )
 }
 
 export default ListCard;
