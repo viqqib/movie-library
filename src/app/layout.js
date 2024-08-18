@@ -24,7 +24,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${dm_sans.className} ${dm_serif_display.variable} bg-teal-950`}>
+      <body className={`${dm_sans.className} ${dm_serif_display.variable} bg-teal-950 pb-10`}>
       <QueryProvider>
         <Header />
         {children}

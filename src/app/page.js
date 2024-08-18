@@ -59,7 +59,7 @@ export default function Home() {
 
   return (
     <main>
-      <div className="bg-teal-950 min-h-screen justify-center md:px-44 px-5 text-white pb-10">
+      <div className="min-h-screen justify-center md:px-44 px-5 text-white pb-10">
 
 
         <div className="popular-movie-container">
@@ -77,7 +77,7 @@ export default function Home() {
                   key={index}
                   src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
                   title={movie.title}
-                  link={`details/${movie.title}`}
+                  link={`details/${movie.id}`}
 
                 />
               ))}

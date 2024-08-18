@@ -2,7 +2,6 @@
 import React, { useState } from "react";
 import { useQuery } from '@tanstack/react-query';
 import axios from "axios";
-import ListCard from "@/components/ListCard";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa"; 
 
 const fetchTopRatedFromTmdb = async (page = 1) => {
@@ -46,10 +45,10 @@ export default function TopRated() {
                 <div className="w-full flex flex-wrap">
                     {displayedData?.map((movie, index) => (
                         <div key={index}>
-                            <ListCard
+                            {/* <ListCard
                                 src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
                                 title={movie.title}
-                            />
+                            /> */}
                         </div>
                     ))}
                 </div>
