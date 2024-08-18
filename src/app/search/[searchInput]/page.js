@@ -79,11 +79,13 @@ export default function SearchPage( { params } ) {
             {data?.map((movie, index) => (
                 <ListCard 
                     index={index}
+                    key={movie.id}
                     posterUrl={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
                     detailUrl={`../details/${movie.id}`} //
                     title={movie.title}
                     genre={movie.genre_ids.map(id => genreMap[id]).join(", ")}
                 />
+
             ))}
      
 

@@ -10,7 +10,7 @@ const ListCard = (props) => {
     const index = props.index;
     return (
         <div
-                key={index}
+                key={props.key}
                 className={`w-full md:w-[50%] flex flex-row md:py-2 ${index % 2 === 0 ? 'md:r-5' : 'md:pl-5'} duration-200`}
             >
                 <div
