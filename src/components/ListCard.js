@@ -11,7 +11,6 @@ const ListCard = (props) => {
     return <>
         <div
                 className={`w-full md:w-[50%] flex flex-row md:py-2 ${index % 2 === 0 ? 'md:r-5' : 'md:pl-5'} duration-200`}
-                key={index}
             >
                 <div
                 className="flex w-full backdrop-blur-lg bg-white/10 rounded-md duration-200 p-2"
