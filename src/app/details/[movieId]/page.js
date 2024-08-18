@@ -55,11 +55,12 @@ export default function Details( { params } ) {
 
        <p className="text-5xl">{movieDirector?.name}</p>
 
-       {mainMovieCasts?.map(cast => (
-         <p>
-            {cast.name}
-         </p>
-       ))}
+       {mainMovieCasts?.map((cast, index) => (
+            <p key={index}>
+                {index}: {cast.name}
+            </p>
+        ))}
+
        <p></p>
        </div>
     </>

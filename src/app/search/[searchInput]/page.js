@@ -77,7 +77,8 @@ export default function SearchPage( { params } ) {
                 </div>
             
             {data?.map((movie, index) => (
-                <ListCard index={index}
+                <ListCard 
+                    index={index}
                     posterUrl={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
                     detailUrl={`../details/${movie.id}`} //
                     title={movie.title}
