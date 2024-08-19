@@ -5,6 +5,7 @@ import { useQueries } from "@tanstack/react-query";
 import MovieCard from "@/components/MovieCard";
 import {FaChevronCircleLeft, FaChevronCircleRight} from 'react-icons/fa'
 import Header from "@/components/Header";
+import MovieCardSlider from "@/components/MovieCardSlider";
 
 
 const fetchPopularFromTmdb = async () => {
@@ -61,13 +62,17 @@ export default function Home() {
     <main>
       <div className="min-h-screen justify-center md:px-44 px-5 text-white pb-10">
 
+        <MovieCardSlider 
+        movieTitle={popularMovies.map(movie => movie.title)}
+        moviePoster={popularMovies.map(movie => movie.poster_path)}
+        />
 
-        <div className="popular-movie-container">
+        {/* <div className="popular-movie-container">
           <div className="flex items-center">
             <div className="text-xl border-red-500 border-l-4 h-4"></div>
             <p className="md:text-lg ml-2">Popular Movies</p>
           </div>
-          
+           
           <div className="relative flex items-center    mt-3">
             <FaChevronCircleLeft size={35} className="hidden md:block opacity-30 hover:opacity-80 duration-300 cursor-pointer absolute z-10 left-1 top-32" onClick={slideLeft}/>
             <div className=" space-x-3 md:space-x-5 overflow-y-hidden overflow-x-scroll scroll  scrollbar-hide scroll-smooth flex" id="slider">
@@ -84,7 +89,7 @@ export default function Home() {
               <FaChevronCircleRight size={35} className="hidden md:block opacity-30 hover:opacity-90 duration-300 absolute z-10 right-2 top-32 cursor-pointer" onClick={slideRight}/>
             </div>
           </div>
-        </div>
+        </div> */}
 
         
       </div>
