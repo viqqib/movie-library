@@ -4,7 +4,7 @@ import axios from "axios";
 import { useQueries } from "@tanstack/react-query";
 import MovieCard from "@/components/MovieCard";
 import {FaChevronCircleLeft, FaChevronCircleRight} from 'react-icons/fa'
-import Header from "@/components/Header";
+import NewsGlass from "@/components/NewsGlass";
 import MovieCardSlider from "@/components/MovieCardSlider";
 
 
@@ -14,20 +14,20 @@ const fetchPopularFromTmdb = async () => {
   return response.data.results;
 };
 
+const fetchMovieNews = async () => {
+  const newsApiKey = "b1a494feef7d45d0b3cc6f2219a9f17"
+  const response = await axios.get(`https://newsapi.org/v2/everything?q=movies&apiKey=${newsApiKey}e&sortBy=publishedAt`)
+  const articles = response.data.articles.slice(0, 5);
+  return articles;
+}
+
+
+
 
 
 export default function Home() {
 
-  const slideLeft = () => {
-    var slider = document.getElementById('slider')
-    slider.scrollLeft = 0
-  }
-
-  const slideRight = () => {
-    var slider = document.getElementById('slider')
-    slider.scrollLeft = slider.scrollLeft + 1330
-  }
-
+  
   // Execute the queries with useQueries
   const results = useQueries({
     queries: [
@@ -35,26 +35,23 @@ export default function Home() {
         queryKey: ['popularMovies'],
         queryFn: fetchPopularFromTmdb,
       },
+      {
+        queryKey: ['movieNews'],
+        queryFn: fetchMovieNews,
+      }
     ],
   });
 
   // Destructure the results
   const popularMoviesResult = results[0];
-  const topRatedMoviesResult = results[1];
+  const movieNewsResult = results[1];
 
-  // // Error handling
-  // if (popularMoviesResult?.isError || topRatedMoviesResult?.isError) {
-  //   return <div>Error: {popularMoviesResult?.error?.message || topRatedMoviesResult?.error?.message}</div>;
-  // }
 
-  // // Loading state
-  // if (popularMoviesResult?.isLoading || topRatedMoviesResult?.isLoading) {
-  //   return <div>Loading...</div>;
-  // }
+
 
   // Access the data from the results
   const popularMovies = popularMoviesResult?.data || [];
-  const topRatedMovies = topRatedMoviesResult?.data || [];
+  const movieNews = movieNewsResult?.data || [];
 
 
 
@@ -62,10 +59,32 @@ export default function Home() {
     <main>
       <div className="min-h-screen justify-center md:px-44 px-5 text-white pb-10">
 
-        <MovieCardSlider 
-        movieTitle={popularMovies.map(movie => movie.title)}
-        moviePoster={popularMovies.map(movie => movie.poster_path)}
-        />
+        <div className="container flex md:flex-row flex-col items-start w-full justify-between md:space-x-5">
+
+          
+         <div className="w-full">
+         <MovieCardSlider 
+            movieTitle={popularMovies.map(movie => movie.title)}
+            movieId={popularMovies.map(movie => movie.id)}
+            moviePoster={popularMovies.map(movie => movie.poster_path)}
+            />
+
+          
+         </div>
+
+          <div className="w-full h-full rounded-md mt-3 md:mt-0">
+            <NewsGlass
+              newsTitle={movieNews.map(news => news.title )}
+              newsSource={movieNews.map(news => news.source.name )}
+              newsThumbnail={movieNews.map(news => news.urlToImage)}
+              newsAuthor={movieNews.map(news => news.author )}
+              newsDate={movieNews.map(news => news.publishedAt )}
+            />
+            {/* { movieNews.map((news, index) => (
+              <p>{news.title}</p>
+            ))} */}
+          </div>
+        </div>
 
         {/* <div className="popular-movie-container">
           <div className="flex items-center">
