@@ -46,9 +46,9 @@ const NewsGlass = (props) => {
                             }}
                         ></div>
                         <div className="ml-3">
-                            <p className="text-xs leading-4 mb-1">{source[index]}</p>
+                            <p className="text-xs leading-4 mt-2">{source[index]} • {formatPublishedAt(date[index])}</p>
                             <p className="md:text-base text-sm font-medium">{item}</p>
-                            <p className="text-xs leading-4 mt-2">{author[index]} • {formatPublishedAt(date[index])}</p>
+                          
                         </div>
                     </div>
                 ))}

@@ -21,6 +21,11 @@ const fetchMovieNews = async () => {
   return articles;
 }
 
+const fetchCinemaNews = async () => {
+  const apikey = "pub_512892ebafeace77c2fca0ea6da25c2c76451"
+  const response = await axios.get(`https://newsdata.io/api/1/latest?apikey=${apikey}&q=hollywood`)
+  return response.data.results.slice(0,5);
+}
 
 
 
@@ -37,7 +42,7 @@ export default function Home() {
       },
       {
         queryKey: ['movieNews'],
-        queryFn: fetchMovieNews,
+        queryFn: fetchCinemaNews,
       }
     ],
   });
@@ -75,10 +80,10 @@ export default function Home() {
           <div className="w-full h-full rounded-md mt-3 md:mt-0">
             <NewsGlass
               newsTitle={movieNews.map(news => news.title )}
-              newsSource={movieNews.map(news => news.source.name )}
-              newsThumbnail={movieNews.map(news => news.urlToImage)}
+              newsSource={movieNews.map(news => news.source_name )}
+              newsThumbnail={movieNews.map(news => news.image_url)}
               newsAuthor={movieNews.map(news => news.author )}
-              newsDate={movieNews.map(news => news.publishedAt )}
+              newsDate={movieNews.map(news => news.pubDate )}
             />
             {/* { movieNews.map((news, index) => (
               <p>{news.title}</p>

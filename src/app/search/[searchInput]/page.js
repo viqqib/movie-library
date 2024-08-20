@@ -25,7 +25,7 @@ export default function SearchPage( { params } ) {
         return response.data.Search;
     }
 
-    const tmdbApiKey = "92b0f3d01f07b3710e21b8f604bf0646";
+    const tmdbApiKey = process.env.NEXT_PUBLIC_TMDB_API_KEY;
 
     const [genreMap, setGenreMap] = useState({});
 
